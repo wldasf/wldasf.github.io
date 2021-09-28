@@ -1,12 +1,26 @@
-Overthewire bandit is a Linux CTF that's challenging but fun. I chose to write about this specific bandit because how challenging it was.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/styles.css'>
+    <script src='/scripts.js'></script>
+    <title>OverTheWire Bandit Level 12 Writeup</title>
+</head>
+<body>
+    <div class="container">
+        <h1>OverTheWire Bandit Level-12 Writeup</h1>
 
-Goal of the challenge:
-The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+        <p>Overthewire bandit is a Linux CTF that's challenging but fun. I chose to write about this specific bandit because how challenging it was.</p>
+    
+        <p>
+            <strong>Goal of the challenge</strong>: <br>
+            The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+        </p>
 
-We are given a list of Linux commands that might be useful:
-grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file
-
-And finally a Wikipedia page that explains what a Hex dump is.
+        <p> We are given a list of Linux commands that might be useful: <br>
+        <span>grep</span>, <span>sort</span>, <span>uniq</span>, <span>strings</span>, <span>base64</span>, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file And finally a Wikipedia page that explains what a Hex dump is.</p>
 
 
 First, let's SSH into the given host which is:
@@ -112,3 +126,8 @@ bandit12@bandit:/tmp/myname123$ cat data8
 The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 And there you have, the password for bandit12. Thanks for reading!
+    </div>
+    
+</body>
+</html>
+
