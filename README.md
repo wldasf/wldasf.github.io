@@ -1,1 +1,1 @@
-# A website to post blogs
+# A website for blogs
