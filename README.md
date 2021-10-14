@@ -1,1 +1,1 @@
-# Blog and portfolio website
+# A website for blogs
