@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/styles.css'>
+    <script src='/scripts.js'></script>
+    <title>Random Quiz Generator</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Random Quiz Generator</h1>
+        <span>12/3/2021</span>
+        <br><br>
+
+        <h2>Introduction</h2>
+        <p>In this blog I will briefly dissect how the <a href='https://github.com/waleed110/generate-random-quiz-files'>Random Quiz Generator</a> script works.</p>
+        
+        <p>When the script is run it will generate two sets of .txt files, each set has 35 files. The first set will have the name "capitalsquiz#.txt" (# will be a number from 1 to 35), that contains randomly generated questions. The second set will have the answers for the questions in files named "capitalsquiz_answers#.txt".</p>
+
+        <h2>Code</h2>
+        <code>capitals = {'Alabama': 'Montgomery', 'Alaska': 'Juneau', 'Arizona': 'Phoenix',
+            'Arkansas': 'Little Rock', 'California': 'Sacramento', 'Colorado': 'Denver',
+            'Connecticut': 'Hartford', 'Delaware': 'Dover', 'Florida': 'Tallahassee',
+            'Georgia': 'Atlanta', 'Hawaii': 'Honolulu', 'Idaho': 'Boise', 'Illinois':
+            'Springfield', 'Indiana': 'Indianapolis', 'Iowa': 'Des Moines', 'Kansas':
+            'Topeka', 'Kentucky': 'Frankfort', 'Louisiana': 'Baton Rouge', 'Maine':
+            'Augusta', 'Maryland': 'Annapolis', 'Massachusetts': 'Boston', 'Michigan':
+            'Lansing', 'Minnesota': 'Saint Paul', 'Mississippi': 'Jackson', 'Missouri':
+            'Jefferson City', 'Montana': 'Helena', 'Nebraska': 'Lincoln', 'Nevada':
+            'Carson City', 'New Hampshire': 'Concord', 'New Jersey': 'Trenton', 'New Mexico': 'Santa Fe', 'New York': 'Albany',
+            'North Carolina': 'Raleigh', 'North Dakota': 'Bismarck', 'Ohio': 'Columbus', 'Oklahoma': 'Oklahoma City',
+            'Oregon': 'Salem', 'Pennsylvania': 'Harrisburg', 'Rhode Island': 'Providence',
+            'South Carolina': 'Columbia', 'South Dakota': 'Pierre', 'Tennessee':
+            'Nashville', 'Texas': 'Austin', 'Utah': 'Salt Lake City', 'Vermont':
+            'Montpelier', 'Virginia': 'Richmond', 'Washington': 'Olympia', 'West Virginia': 'Charleston', 'Wisconsin': 'Madison', 'Wyoming': 'Cheyenne'}</code>
+            
+        <p>The dictionary is used to randomly pick states (dictionary keys), add them in a question with four answers to pick from.</p>
+
+        <code>for quizNum in range(35): <br>
+                # Create the quiz and answer key files. <br>
+                quizFile = open(f'capitalsquiz{quizNum + 1}.txt', 'w') <br>
+                answerKeyFile = open(f'capitalsquiz_answers{quizNum + 1}.txt', 'w') <br>
+                # Write out the header for the quiz. <br>
+                quizFile.write('Name:\n\nDate:\n\nPeriod:\n\n') <br>
+                quizFile.write((' ' * 20) + f'State Capitals Quiz (Form{quizNum + 1})') <br>
+                quizFile.write('\n\n')
+        </code>
+
+        <p> The for loop loops 35 times generating all the quiz and answers files as described previously, numbered from 1 to 35. The bottom three lines outline space for the student to write their name, date, and period of the quiz.</p>
+
+        <code>states = list(capitals.keys()) <br>
+                random.shuffle(states)
+        </code>
+
+        <p>The first line in this block adds all the keys in the capitals dictionary to a list assigned to the variable states. Then the items in the states list will be shuffled so that the questions are random and no can cheat, or at least make it really hard.</p>
+            
+        <code>for questionNum in range(50): <br>
+                # Get right and wrong answers. <br>
+                correctAnswer = capitals[states[questionNum]] <br>
+                wrongAnswers = list(capitals.values()) <br>
+                del wrongAnswers[wrongAnswers.index(correctAnswer)] <br>
+                wrongAnswers = random.sample(wrongAnswers, 3) <br>
+                answerOptions = wrongAnswers + [correctAnswer] <br>
+                random.shuffle(answerOptions)
+        </code>
+
+        <p>Each quiz file generated has random 50 questions. This block Makes sure that the four answers presented have three wrong and one correct.</p>
+            
+        <code># TODO: Write the question and answer options to the quiz file. <br>
+                quizFile.write(f'{questionNum + 1}. What is the capital of {states[questionNum]}?\n') <br>
+                for i in range(4): <br>
+                   quizFile.write(f"    {'ABCD'[i]}. { answerOptions[i]}\n") <br>
+                quizFile.write('\n')
+        </code>
+
+        <p>This block generates the questions and gives them numbers from 1 to 50, and then generates four answers below it. The answers will be lettered from A to D.</p>
+            
+        <code># Write the answer key to a file. <br>
+                answerKeyFile.write(f"{questionNum + 1}. {'ABCD'[answerOptions.index(correctAnswer)]}\n")
+        </code>
+
+        <p>This line writes the correct answers to the second set of .txt files.</p>    
+
+        <p>All of these lines combined creates something that looks like this:</p>
+        <img src="/blogs/quiz-random-generator/images/quiz.png" alt="a quiz file">
+    
+        <h2>Conclusion</h2>
+        <p>I think this script is helpful for creating randomized questions if the test material is simple like, what's the capital for a specific state. It would need plenty of improvement for more complex study material.</p>
+    </div>
+    
+    
+</body>
+</html>
+
