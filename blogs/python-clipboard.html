@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='/styles.css'>
-    <script src='/styles.css'></script>
+    <script src='/scripts.js'></script>
     <title>Python Clipboard</title>
 </head>
 <body>
     <div class="container">
         <h1>Python Clipboard</h1> 
-        <span>03/06/2022</span>
+        <span>Mar 6, 2022</span>
 
         <p>The script allows users to save multiple keywords and access them on-demand. it uses pyperclip to paste the words stored in sys.argv into a file called mcb.</p> 
 
-        <img src="/blogs/python clipboard/images/usage.png">
+        <img src="/blogs/resources/python-clipboard/usage.png">
 
         <p>Listing the keywords pastes the content of file mcb into the clipboard.</p>
 
@@ -25,15 +25,19 @@
 
         <h2>Code Breakdown:</h2>
 
-        <img src="/blogs/python clipboard/images/save.png">
+        <img src="/blogs/resources/python-clipboard/save.png">
 
         <p>sys.argv is a list in Python, which contains the command-line arguments passed to the script. The sys.argv list always has the name of the script file on index 0. When the user calls the script with "save <i>keyword</i>" an if statement checks the length of sys.argv if it's 3 (length starts from 1, index starts from 0). name of the file will be at index 0, <code>save</code> at index 1 and the keyword at index 2. In that case pyperclip will paste the keyword in index 2 to the file mcb.</p>
 
-        <img src="/blogs/python clipboard/images/delete.png">
+        <br><br>
+
+        <img src="/blogs/resources/python-clipboard/delete.png">
 
         <p><code>delete</code> has similar code to <code>save</code> but instead of pasting to mcb it deletes the keyword from the file.</p>
 
-        <img src="/blogs/python clipboard/images/rest.png">
+        <br><br>
+
+        <img src="/blogs/resources/python-clipboard/rest.png">
 
         <p>If sys.argv only receives a command and no keyword, check if it's <code>list</code> or <code>clear</code>. list will copy all keywords from the mcb file to the clipboard by converting all keywords from list to string.</p>
 
