@@ -1,6 +1,8 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: calc(1em + 0.33vw);
+    background-color: #252627;
+    color: #a9a9b3;
 }
 
 .container{
@@ -20,7 +22,7 @@ a{
 }
 
 a:hover{
-    color: black;
+    color: whitesmoke;
 }
 
 span{
@@ -46,6 +48,7 @@ span{
 }
 
 code {
-    background-color:lightgrey ;
-    font-size: 0.9rem;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.85em;
+    background-color: transparent;
 }
