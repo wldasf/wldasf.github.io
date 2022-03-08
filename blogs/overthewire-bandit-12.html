@@ -43,7 +43,7 @@
 
         <p>Next, according to the challenge "The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed." We need to figure out what type of compression it is so we can decompress it.</p>
 
-        <p><code>bandit12@bandit:/tmp/myname123$ file data.txt <br> 
+        <p><code>bandit12@bandit:/tmp/myname123$ file data.txt <br>
             data.txt: ASCII text</code></p>
 
         <p>The file contains ASCII, a hex dump. What we can do is use xxd -r to reverse the hex dump into binary then dump it into a file.</p>
@@ -100,6 +100,8 @@
             bandit12@bandit:/tmp/myname123$ tar xvf data5.tar <br>
             data6.bin</code></p>
 
+            <br>
+
         <p><code>bandit12@bandit:/tmp/myname123$ file data6.bin <br> 
             data6.bin: bzip2 compressed data, block size = 900k <br>
             bandit12@bandit:/tmp/myname123$ mv data6.bin data6.bz2 <br>
@@ -107,11 +109,15 @@
             bandit12@bandit:/tmp/myname123$ ls <br>
             data5.tar  data6  data.tar  data.txt</code></p>
 
+            <br>
+
         <p><code>bandit12@bandit:/tmp/myname123$ file data6 <br>
             data6: POSIX tar archive (GNU) <br>
             bandit12@bandit:/tmp/myname123$ mv data6 data6.tar <br>
             bandit12@bandit:/tmp/myname123$ tar xvf data6.tar <br>
             data8.bin</code></p>
+
+            <br>
 
         <p><code>bandit12@bandit:/tmp/myname123$ file data8.bin <br> 
             data8.bin: gzip compressed data, was "data9.bin", last modified: Thu May  7 18:14:30 2020, max compression, from Unix <br>
@@ -119,6 +125,8 @@
             bandit12@bandit:/tmp/myname123$ gzip -d data8.gz <br>
             bandit12@bandit:/tmp/myname123$ ls <br>
             data5.tar  data6.tar  data8  data.tar  data.txt</code></p>
+
+            <br>
 
         <p><code>bandit12@bandit:/tmp/myname123$ file data8 <br>
             data8: ASCII text <br>
