@@ -151,4 +151,4 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
 The password for the next level, bandit13, is **8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL**.
 
-If you've reached this far. Thanks for reading!
+If you've reached this far. Thanks for reading my first writeup!

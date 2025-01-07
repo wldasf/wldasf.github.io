@@ -1,1 +1,1 @@
-Made this blog to write about my projects, topics of interest and topics I struggled to understand.
+A personal blog for writeups and topics of interest
