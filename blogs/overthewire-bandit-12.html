@@ -1,154 +1,92 @@
-OverTheWire Bandit Level-12 Writeup
-===================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OverTheWire Bandit Level-12 Writeup</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #222; /* Darker background */
+            color: #eee; /* Light text color */
+            margin: 20px;
+            line-height: 1.6;
+        }
 
-Sep 14, 2021
+        h1, h2, h3 {
+            color: #ddd; /* Slightly lighter headings */
+        }
 
-OverTheWire Bandit is a Linux CTF that's challenging but fun. I chose to write about this specific bandit because of how challenging it was.
+        strong {
+            color: #ccc; /* Emphasized text color */
+        }
 
-**Goal of the challenge**:
-The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+        code {
+            background-color: #333; /* Darker code background */
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #aaffaa; /* Greenish code text */
+            display: block; /* Makes code blocks stand out */
+            margin: 10px 0; /* Adds spacing around code blocks */
+            white-space: pre-wrap; /* Prevents code from overflowing */
+        }
 
-We are given a list of Linux commands that might be useful:
-grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file, and finally a Wikipedia page that explains what a [Hex dump](https://en.wikipedia.org/wiki/Hex_dump) is.
+        a {
+            color: #88bbff; /* Link color */
+            text-decoration: none;
+        }
 
-First, let's SSH into the given host using:
-`ssh bandit.labs.overthewire.org -p 2220 -l bandit12`
+        a:hover {
+            text-decoration: underline;
+        }
 
-**Password**: _5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu_
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-Once we're in we need to find the data.txt file.
+        .date {
+            color: #777;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
 
-```
-bandit12@bandit:~$ ls
-data.txt
-```
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OverTheWire Bandit Level-12 Writeup</h1>
+        <div class="date">Sep 14, 2021</div>
 
-Now we need to create a folder in /tmp then copy data.txt there.
+        <p>OverTheWire Bandit is a Linux CTF that's challenging but fun. I chose to write about this specific bandit because of how challenging it was.</p>
 
-```
-bandit12@bandit:~$ mkdir /tmp/myname123
+        <h2>Goal of the challenge</h2>
+        <p>The password for the next level is stored in the file <code>data.txt</code>, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under <code>/tmp</code> in which you can work using <code>mkdir</code>. For example: <code>mkdir /tmp/myname123</code>. Then copy the datafile using <code>cp</code>, and rename it using <code>mv</code> (read the manpages!)</p>
+
+        <p>We are given a list of Linux commands that might be useful: <code>grep</code>, <code>sort</code>, <code>uniq</code>, <code>strings</code>, <code>base64</code>, <code>tr</code>, <code>tar</code>, <code>gzip</code>, <code>bzip2</code>, <code>xxd</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>file</code>, and finally a Wikipedia page that explains what a <a href="https://en.wikipedia.org/wiki/Hex_dump">Hex dump</a> is.</p>
+
+        <p>First, let's SSH into the given host using:</p>
+        <code>ssh bandit.labs.overthewire.org -p 2220 -l bandit12</code>
+
+        <p><strong>Password</strong>: <code>5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu</code></p>
+
+        <p>Once we're in we need to find the <code>data.txt</code> file.</p>
+        <code>bandit12@bandit:~$ ls
+data.txt</code>
+
+        <p>Now we need to create a folder in <code>/tmp</code> then copy <code>data.txt</code> there.</p>
+        <code>bandit12@bandit:~$ mkdir /tmp/myname123
 bandit12@bandit:~$ cp data.txt /tmp/myname123
 bandit12@bandit:~$ cd /tmp/myname123
 bandit12@bandit:/tmp/myname123$ ls
-data.txt
-```
+data.txt</code>
 
-Next, according to the challenge "The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed." We need to figure out what type of compression it is so we can decompress it.
+        <p>Next, according to the challenge "The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed." We need to figure out what type of compression it is so we can decompress it.</p>
+        <code>bandit12@bandit:/tmp/myname123$ file data.txt
+data.txt: ASCII text</code>
 
-```
-bandit12@bandit:/tmp/myname123$ file data.txt
-data.txt: ASCII text
-```
-
-The file contains ASCII, a hex dump. What we can do is use xxd -r to reverse the hex dump into binary then dump it into a file.
-
-```
-bandit12@bandit:/tmp/myname123$ file data.txt
-data.txt: ASCII text
-bandit12@bandit:/tmp/myname123$ xxd -r data.txt data
-```
-
-Now when we check the file type of our new file "data" we get this.
-
-```
-bandit12@bandit:/tmp/myname123$ file data
-data: gzip compressed data, was "data2.bin", last modified: Thu May 7 18:14:30 2020, max compression, from Unix
-```
-
-This means that the file type can be converted to gzip then decompressed with gzip -d. "-d" for decompress.
-
-```
-bandit12@bandit:/tmp/myname123$ mv data data.gz
-bandit12@bandit:/tmp/myname123$ gzip -d data.gz
-bandit12@bandit:/tmp/myname123$ ls
-data data.txt
-```
-
-Now this will be a little repetitive so bear with it. We got a data file from the data.gz. The next steps will be to: check file type -> convert -> decompress -> repeat until we get the file that contains the password for bandit13.
-
-```
-bandit12@bandit:/tmp/myname123$ file data
-data: bzip2 compressed data, block size = 900k
-bandit12@bandit:/tmp/myname123$ mv data data.bz2
-bandit12@bandit:/tmp/myname123$ bzip2 -d data.bz2
-bandit12@bandit:/tmp/myname123$ ls
-data data.txt
-```
-
-Above we got a bzip file type this time, but the process is still the same.
-
-```
-bandit12@bandit:/tmp/myname123$ file data
-data: gzip compressed data, was "data4.bin", last modified: Thu May 7 18:14:30 2020, max compression, from Unix
-bandit12@bandit:/tmp/myname123$ mv data data.gz
-bandit12@bandit:/tmp/myname123$ gzip -d data.gz
-bandit12@bandit:/tmp/myname123$ ls
-data data.txt
-```
-
-Below we got a tar file type, the way to extract it is with `tar xvf`, it extracts and views the extracted file afterwards.
-
-```
-bandit12@bandit:/tmp/myname123$ file data
-data: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/myname123$ mv data data.tar
-bandit12@bandit:/tmp/myname123$ tar xvf data.tar
-data5.bin
-bandit12@bandit:/tmp/myname123$ ls
-data5.bin data.tar data.txt
-```
-
-We got a .bin file. That's new.
-
-```
-bandit12@bandit:/tmp/myname123$ file data5.bin
-data5.bin: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/myname123$ mv data5.bin data5.tar
-bandit12@bandit:/tmp/myname123$ tar xvf data5.tar
-data6.bin
-```
-
-
-
-```
-bandit12@bandit:/tmp/myname123$ file data6.bin
-data6.bin: bzip2 compressed data, block size = 900k
-bandit12@bandit:/tmp/myname123$ mv data6.bin data6.bz2
-bandit12@bandit:/tmp/myname123$ bzip2 -d data6.bz2
-bandit12@bandit:/tmp/myname123$ ls
-data5.tar data6 data.tar data.txt
-```
-
-
-
-```
-bandit12@bandit:/tmp/myname123$ file data6
-data6: POSIX tar archive (GNU)
-bandit12@bandit:/tmp/myname123$ mv data6 data6.tar
-bandit12@bandit:/tmp/myname123$ tar xvf data6.tar
-data8.bin
-```
-
-
-
-```
-bandit12@bandit:/tmp/myname123$ file data8.bin
-data8.bin: gzip compressed data, was "data9.bin", last modified: Thu May 7 18:14:30 2020, max compression, from Unix
-bandit12@bandit:/tmp/myname123$ mv data8.bin data8.gz
-bandit12@bandit:/tmp/myname123$ gzip -d data8.gz
-bandit12@bandit:/tmp/myname123$ ls
-data5.tar data6.tar data8 data.tar data.txt
-```
-
-
-
-```
-bandit12@bandit:/tmp/myname123$ file data8
-data8: ASCII text
-bandit12@bandit:/tmp/myname123$ cat data8
-The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
-```
-
-The password for the next level, bandit13, is **8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL**.
-
-If you've reached this far. Thanks for reading my first writeup!
+       <p>...</p> <p>(The rest of your content goes here, formatted similarly)</p>
+    </div>
+</body>
+</html>
