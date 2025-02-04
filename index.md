@@ -1,4 +1,4 @@
-wldasf [![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/wldasf) [![X](https://img.shields.io/badge/X-000000?style=flat&logo=x)](https://x.com/wldasf)
+wldasf [![GitHub](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/wldasf)
 ============
 
 [Python Clipboard](/blogs/python-clipboard.md)
