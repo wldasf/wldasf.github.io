@@ -3,9 +3,9 @@ Personalizing Guided Project Learning with LLMs
 
 Feb 02, 2025
 
-I find blogs that guide learners into creating programming projects interesting but also limited because they are often outdated, and lack the customizability of your familiar technologies. Often I find that when I want to learn certain concepts in computer science these kind of guided projects don't fill in the gaps. 
+I find blogs that guide learners into creating programming projects interesting but also limited because they are often outdated, and lack the customizability of your personally familiar technologies. I often find that when I want to learn certain concepts in computer science these kind of guided projects don't fill in the gaps. 
 
-As an alternative, I found that I can just use an LLM to guide me through projects of my choosing whiel integrating concepts that I want to learn in order to make it more fun and practical. To make sure I'm properly learning and not just typing code I specify in my prompt to explain every piece generated and a high level overview to make sure I understand what I'm doing. I write every line of code by hand just like I would do with a guided project blog but I get the customizability that I want and active engagement while building the project.
+As an alternative, I found that I can just use an LLM to guide me through projects of my choosing while integrating concepts that I want to learn in order to make it more fun and practical. To make sure I'm properly learning and not just typing code I specify in my prompt to explain every piece generated and a high level overview to make sure I understand what I'm doing. I write every line of code by hand just like I would do with a guided project blog but I get the customizability that I need and active engagement while building the project.
 
 A rough example of what I would prompt the LLM with:
 ```
