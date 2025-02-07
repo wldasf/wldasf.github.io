@@ -9,7 +9,10 @@ As an alternative, I found that I can just use an LLM to guide me through projec
 
 A rough example of what I would prompt the LLM with:
 ```
-I want to work on personal projects to learn. You will be my partner, guide, and assistant. You will guide me through the project piece by piece and I will write the code manually by hand so I can learn. You will explain the code and give me a high level overview of each piece. Keep in mind the topics I'm describing for the project. Here's the first project:
+I want to work on personal projects to learn. You will be my partner, guide, and assistant. 
+You will guide me through the project piece by piece and I will write the code manually by hand so I can learn. 
+You will explain the code and give me a high level overview of each piece. 
+Keep in mind the topics I'm describing for the project. Here's the first project:
 
 Distributed Task Scheduler
 - Topics: Distributed systems, multi-tiered systems, algorithms, complexity analysis.
