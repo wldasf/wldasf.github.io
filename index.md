@@ -2,7 +2,7 @@
 
 
 Feb 15, 2025<br>
-[Cache in the computer](/blogs/cache.md)
+[Simplified Explanation of CPU Cache in the Computer](/blogs/cpu-cache.md)
 
 Feb 02, 2025<br>
 [Personalizing Guided Project Learning with LLMs](/blogs/guided-project-based-learning.md)

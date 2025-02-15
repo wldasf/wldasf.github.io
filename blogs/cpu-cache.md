@@ -1,5 +1,5 @@
-Cache in the computer
-=====================
+Simplified Explanation of CPU Cache in the Computer
+===================================================
 
 15 Feb, 2025
 
